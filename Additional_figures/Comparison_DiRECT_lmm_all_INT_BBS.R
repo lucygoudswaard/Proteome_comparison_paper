@@ -59,7 +59,7 @@ library(scatterplot3d)
 library(readxl)
 library(ggrepel)
 
-setwd("~/OneDrive - University of Bristol/DiRECT/DiRECT_output")
+setwd("file/path")
 
 DiRECT <- read_excel("bmi_change_protein_main_delta_rnt_26.4.21.xlsx", sheet = "2SLS_BMI_protein")
 DiRECT <- DiRECT[-c(16)]
@@ -75,12 +75,12 @@ DiRECT <- distinct(DiRECT,Target, .keep_all = T)
 DandI <- merge(DiRECT, INTERVAL, by.x = "Target", by.y = "Target.x", all= FALSE)
 
 ### Read in some Olink results from ByBandSleeve to merge with the Soma data
-olink <- read.table(file = "/Volumes/012/working/results/tables/06_BMI_change_prot_change_reg.txt", sep = "\t", header = T)
+olink <- read.table(file = "file/path/06_BMI_change_prot_change_reg.txt", sep = "\t", header = T)
 all_models <- merge(olink, DandI, by.x = "UniProt", by.y = "UniProtID.x", all = F)
 all_models$Category <- ifelse(all_models$Pval < 0.001 & all_models$P_val.y < 0.001 & all_models$P_lm < 0.001 , "Associated in all", "Not associated in all")
 
 ### Read in alternative LMM files
-BBS_LMM <- read.table(file = "/Volumes/012/working/results/tables/06_time_rnt_protein_LMM.txt", sep = "\t", header = T)
+BBS_LMM <- read.table(file = "file/path/06_time_rnt_protein_LMM.txt", sep = "\t", header = T)
 ### How many proteins increase with 
 w <- which(BBS_LMM$P < 6.2e-5) # 191
 Associated_BBS <- BBS_LMM[w,]
